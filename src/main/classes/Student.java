@@ -13,6 +13,9 @@ public class Student {
         this.books = new ArrayList<>();
     }
 
+    public int getId() {
+        return id;
+    }
     public String getName() {
         return name;
     }

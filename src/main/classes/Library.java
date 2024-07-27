@@ -88,8 +88,45 @@ public class Library {
      * @return             The list of students that match the search criteria. Returns null if search type is title or author.
      */
     public ArrayList<Student> searchStudents(SearchByType searchByType, ArrayList<Object> keys) {
-        // TODO complete function
-        return null;
+        ArrayList<Student> result = new ArrayList<>();
+        switch (searchByType) {
+            case ID:
+                for (Object key : keys) {
+                    if (!(key instanceof Integer)) {
+                        System.out.println("Invalid key type for ID search. Keys must be Integers.");
+                        return null;
+                    }
+                }
+                for (Object key : keys) {
+                    int id = (int) key;
+                    for (Student student : students) {
+                        if (student.getId() == id) {
+                            result.add(student);
+                        }
+                    }
+                }
+                break;
+            case NAME:
+                for (Object key : keys) {
+                    if (!(key instanceof String)) {
+                        System.out.println("Invalid key type for NAME search. Keys must be Strings.");
+                        return null;
+                    }
+                }
+                for (Object key : keys) {
+                    String name = (String) key;
+                    for (Student student : students) {
+                        if (student.getName().equals(name)) {
+                            result.add(student);
+                        }
+                    }
+                }
+                break;
+            default:
+                System.out.println("Unsupported search type: " + searchByType);
+                return null;
+        }
+        return result;
     }
 
     /**
