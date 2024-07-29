@@ -121,4 +121,44 @@ public class LibraryTest {
         System.setOut(System.out);
     }
 
+    @Test
+    public void testSearchStudentsInvalidKeyTypeForName() {
+        ArrayList<Object> keys = new ArrayList<>(Arrays.asList(123));
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        assertNull(library.searchStudents(SearchByType.NAME, keys));
+        assertTrue(outContent.toString().contains("Invalid key type for NAME search. Keys must be Strings."));
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testDisplayBooks() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        library.displayBooks();
+        String expectedOutput = "Available books in library:" + System.lineSeparator() +
+                "A Tale of Two Cities by Charles Dickens" + System.lineSeparator() +
+                "Book-1 by Author-1" + System.lineSeparator() +
+                "Book-2 by Author-2" + System.lineSeparator() +
+                "Book-3 by Author-3" + System.lineSeparator() +
+                "Book-4 by Author-1" + System.lineSeparator();
+        assertEquals(expectedOutput, outContent.toString());
+        System.setOut(System.out);
+    }
+
+    @Test
+    public void testDisplayStudents() {
+        ByteArrayOutputStream outContent = new ByteArrayOutputStream();
+        System.setOut(new PrintStream(outContent));
+        library.displayStudents();
+        String expectedOutput = "Registered students:" + System.lineSeparator() +
+                "Ali|2" + System.lineSeparator() +
+                "Alice|10" + System.lineSeparator() +
+                "Bob|11" + System.lineSeparator() +
+                "John|12" + System.lineSeparator();
+        assertEquals(expectedOutput, outContent.toString());
+        System.setOut(System.out);
+    }
+
+
 }
